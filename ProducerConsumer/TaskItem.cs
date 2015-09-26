@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProducerConsumerBlocking
 {
     // A simple representation of a work item
-    class TaskItem
+    public class TaskItem
     {
-        public int Id { get; private set; }
+        public Guid Id { get; private set; }
 
         // Defines how long the TaskItem will take to process
         public int Duration { get; private set; }
 
         private static Random rand = new Random();
 
-        public TaskItem(int id)
+        public TaskItem()
         {
-            Id = id;
-            // values in ms
-            Duration = rand.Next(50, 100);
+            Id = Guid.NewGuid();
+            Duration = rand.Next(50, 100); // values in ms
         }
 
         public override string ToString()
