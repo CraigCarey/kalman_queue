@@ -1,1 +1,6 @@
 C:\Users\Craig\Google Drive\Workspace\Hanweck\ProducerConsumer\bin\Debug\ProducerConsumer.exe.config
+C:\Users\Craig\Google Drive\Workspace\Hanweck\ProducerConsumer\bin\Debug\ProducerConsumer.exe
+C:\Users\Craig\Google Drive\Workspace\Hanweck\ProducerConsumer\bin\Debug\ProducerConsumer.pdb
+C:\Users\Craig\Google Drive\Workspace\Hanweck\ProducerConsumer\obj\Debug\ProducerConsumer.csprojResolveAssemblyReference.cache
+C:\Users\Craig\Google Drive\Workspace\Hanweck\ProducerConsumer\obj\Debug\ProducerConsumer.exe
+C:\Users\Craig\Google Drive\Workspace\Hanweck\ProducerConsumer\obj\Debug\ProducerConsumer.pdb
