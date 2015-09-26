@@ -9,33 +9,43 @@ namespace ProducerConsumer
 {
     class Program
     {
+        private const int NumTasks = 10;
+        private static BlockingCollection<TaskItem> TaskQueue = new BlockingCollection<TaskItem>();
+
+        // used to make consuming slower than producing, to force a queue
+        private const int ConsumerHandicap = 50;
+
         static void Main(string[] args)
+        {   
+            var producerThread = Task.Run(() => RunProducer(NumTasks));
+            var consumerThread = Task.Run(() => RunConsumer());
+
+            Task.WaitAll(producerThread, consumerThread);
+            Console.WriteLine("\r\n\tConsumer finished\r\n");
+        }
+
+        private static void RunProducer(int numTasks)
         {
-            int numTasks = 100;
-
-            var taskQueue = new BlockingCollection<string>();
+            for (int i = 0; i < numTasks; i++)
+            {
+                TaskItem taskItem = new TaskItem(i);
+                Console.WriteLine("Producer - Task: " + i);
+                TaskQueue.Add(taskItem);
+                Thread.Sleep(taskItem.Duration);
+            }
             
-            Task.Factory.StartNew(() =>
-            {
-                for (int i = 0; i < numTasks; i++)
-                {
-                    Console.WriteLine("Producer\tTask: " + i);
-                    taskQueue.Add("task: " + i);
-                    Thread.Sleep(100);
-                }
-            });
+            // Mark the Queue as closed to let the Consumer know that we're finished producing
+            TaskQueue.CompleteAdding();
+            Console.WriteLine("\r\n\tProducer finished\r\n");
+        }
 
-            Task.Factory.StartNew(() =>
+        private static void RunConsumer()
+        {
+            foreach (TaskItem taskItem in TaskQueue.GetConsumingEnumerable())
             {
-                foreach (string value in taskQueue.GetConsumingEnumerable())
-                {
-                    Console.WriteLine("Consumer\t Task: " + value);
-                    Thread.Sleep(150);
-                }   
-            });
-
-            Task.WaitAll();
-            Console.ReadLine();
+                Console.WriteLine("Consumer - " + taskItem.ToString());
+                Thread.Sleep(taskItem.Duration + ConsumerHandicap);
+            }   
         }
     }
 }
