@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ProducerConsumer
+namespace ProducerConsumerBlocking
 {
     class Program
     {
-        private const int NumTasks = 10;
-        private static BlockingCollection<TaskItem> TaskQueue = new BlockingCollection<TaskItem>();
+        // Number of tasks to add to the TaskQueue for processing
+        private const int NumTasks = 100;
 
-        // used to make consuming slower than producing, to force a queue
-        private const int ConsumerHandicap = 50;
+        private static BlockingCollection<TaskItem> TaskQueue = new BlockingCollection<TaskItem>(new ConcurrentQueue<TaskItem>());
+
+        // Used to make Consumer faster or slower than Producer, forcing a queue (value in ms)
+        // if the Consumer is faster than the Producer, it will run out of TaskItems to process, and will block until TaskItems
+        // become available. This is more efficient than spinning
+        private const int ConsumerHandicap = 25;
 
         static void Main(string[] args)
         {   
@@ -24,21 +26,29 @@ namespace ProducerConsumer
             Console.WriteLine("\r\n\tConsumer finished\r\n");
         }
 
+        
+        // The method assigned to the Producer thread
+        // Generates a specified number of TaskItems and adds them to the TaskQueue
         private static void RunProducer(int numTasks)
         {
             for (int i = 0; i < numTasks; i++)
             {
+                // Each TaskItem has Id = i and a random Duration of between 50 and 100ms
                 TaskItem taskItem = new TaskItem(i);
                 Console.WriteLine("Producer - Task: " + i);
                 TaskQueue.Add(taskItem);
                 Thread.Sleep(taskItem.Duration);
             }
-            
-            // Mark the Queue as closed to let the Consumer know that we're finished producing
+
+            // lets the Consumer thread know that no more tasks will be added to the queue
             TaskQueue.CompleteAdding();
             Console.WriteLine("\r\n\tProducer finished\r\n");
         }
 
+        // The method assigned to the Consumer thread
+        // Checks the TaskQueue for items and processes if any available
+        // Blocks when the TaskQueue is empty, ends when CompleteAdding() is called
+        // and the TaskQueue is empty
         private static void RunConsumer()
         {
             foreach (TaskItem taskItem in TaskQueue.GetConsumingEnumerable())

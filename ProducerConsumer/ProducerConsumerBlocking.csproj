@@ -7,7 +7,7 @@
     <ProjectGuid>{DE88EA68-17F6-47CB-8EE6-AD79161D559E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProducerConsumer</RootNamespace>
+    <RootNamespace>ProducerConsumerBlocking</RootNamespace>
     <AssemblyName>ProducerConsumer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

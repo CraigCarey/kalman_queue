@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProducerConsumer
+namespace ProducerConsumerBlocking
 {
+    // A simple representation of a work item
     class TaskItem
     {
         public int Id { get; private set; }
+
+        // Defines how long the TaskItem will take to process
         public int Duration { get; private set; }
 
         private static Random rand = new Random();
@@ -16,6 +19,7 @@ namespace ProducerConsumer
         public TaskItem(int id)
         {
             Id = id;
+            // values in ms
             Duration = rand.Next(50, 100);
         }
 
