@@ -63,19 +63,42 @@ namespace KalmanSimPlot
             chartMain.Series["Measured"].Points.DataBindY(results.MeasuredValues);
 
             chartMain.Series["Filtered"].Points.DataBindY(results.FilteredValues);
+
         }
         
         private void textBoxKeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                GenerateGraph();
+                try
+                {
+                    GenerateGraph();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Failed to generate graph",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button1);
+                }
             }
         }
 
         private void buttonGenerateGraph_Click(object sender, EventArgs e)
         {
-            GenerateGraph();
+            try
+            {
+                GenerateGraph();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed to generate graph",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+            }
         }
     }
 }
