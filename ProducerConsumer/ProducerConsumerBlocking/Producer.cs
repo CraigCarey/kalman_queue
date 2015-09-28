@@ -16,7 +16,7 @@ namespace ProducerConsumerBlocking
         // Generates a specified number of TaskItems and adds them to the TaskQueue
         public void ProduceTasks(BlockingCollection<TaskItem> taskQueue, int numTasks)
         {
-            for (uint i = 0; i < numTasks; i++)
+            for (int i = 0; i < numTasks; i++)
             {
                 try
                 {
@@ -32,7 +32,7 @@ namespace ProducerConsumerBlocking
                 }
             }
 
-            // lets the Consumer thread know that no more tasks will be added to the queue
+            // Lets the Consumer thread know that no more tasks will be added to the queue
             taskQueue.CompleteAdding();
             Console.WriteLine("\r\n\tProducer finished\r\n");
         }

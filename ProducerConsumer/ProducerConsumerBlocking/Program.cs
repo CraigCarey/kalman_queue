@@ -6,7 +6,7 @@ namespace ProducerConsumerBlocking
 {
     public class Program
     {
-        private const int NumTasks = 5;
+        private const int NumTasks = 100;
 
         // Used to make Consumer faster or slower than Producer, forcing a queue (value in ms)
         // if the Consumer is faster than the Producer (handicap is -ve), it will run out of TaskItems

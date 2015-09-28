@@ -2,7 +2,7 @@
 
 namespace ProducerConsumerBlocking
 {
-    // A simple representation of a work item
+    // A simple representation of a piece of work
     public class TaskItem
     {
         public Guid Id { get; private set; }

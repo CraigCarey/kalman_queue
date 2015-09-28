@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1127CB27-DD3F-4BF1-AC03-5670C5B8906B}</ProjectGuid>
+    <ProjectGuid>{E000EA5D-CCAA-4F95-9965-CC1444C58734}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProducerConsumerBlockingTests</RootNamespace>
-    <AssemblyName>ProducerConsumerBlockingTests</AssemblyName>
+    <RootNamespace>KalmanTest</RootNamespace>
+    <AssemblyName>KalmanTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,14 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTestTaskItem.cs" />
-    <Compile Include="UnitTestProducerConsumerBlocking.cs" />
+    <Compile Include="SimplifiedKalmanFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ProducerConsumer\ProducerConsumerBlocking.csproj">
-      <Project>{de88ea68-17f6-47cb-8ee6-ad79161d559e}</Project>
-      <Name>ProducerConsumerBlocking</Name>
+    <ProjectReference Include="..\KalmanPlot\KalmanSimPlot.csproj">
+      <Project>{572503f4-908a-46ba-9079-92cfa02b5a24}</Project>
+      <Name>KalmanSimPlot</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
